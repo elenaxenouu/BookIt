@@ -56,22 +56,27 @@ public class Menu {
     // Μενού Πελάτη
     private void showCustomerMenu(Scanner scanner) {
         System.out.println("=== Μενού Πελάτη ===");
-        system.displayServices(); // Εμφάνιση διαθέσιμων υπηρεσιών
+        system.displayServices();
         System.out.print("Επιλέξτε αριθμό υπηρεσίας: ");
         int serviceChoice = scanner.nextInt();
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Κρατήσεις Πελατών");
+
+        System.out.print("Όνοματεπώνυμο: ");
+        String name = scanner1.nextLine();
+
+        System.out.print("Διαθέσιμο εύρος ωρών (π.χ. 10-14): ");
+        
+        String hours = scanner1.nextLine();
 
         Service selectedService = system.getServiceByIndex(serviceChoice - 1);
         if (selectedService != null) {
             System.out.println("Επιλέξατε: " + selectedService.getName());
             System.out.println("Κόστος: " + selectedService.getCost() + "€");
             System.out.println("Διάρκεια: " + selectedService.getDuration() + " ώρες");
-
-            // Καταχώρηση ραντεβού
-            System.out.print("Εισάγετε το όνομά σας: ");
-            String name = scanner.next();
-            System.out.print("Διαθέσιμο εύρος ωρών (μέγιστο 4): ");
-            int availableHours = scanner.nextInt();
+            System.out.println("Ευχαριστούμε που μας επιλέξατε θα ενημερωθείτε αύριο για την ακριβή ώρα του ραντεβού σας");
+        } else {
+            System.out.println("Μη έγκυρη επιλογή.");
         }
-            
     }
 }
