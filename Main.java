@@ -13,13 +13,6 @@ public class Main {
         system.addService(new Service("Υπηρεσια7", 32.0, 2));
         Menu menu = new Menu(system);
         menu.showMainMenu();
-        int userChoice = 2; // Ο χρήστης επιλέγει τη 2η υπηρεσία (Βαφή Μαλλιών)
-        Service selectedService = system.getServiceByIndex(userChoice - 1);
-
-        if (selectedService != null) {
-            System.out.println("Επιλέξατε: " + selectedService.getName());
-        } else {
-            System.out.println("Μη έγκυρη επιλογή!");
-        }
+        
     }
 }
