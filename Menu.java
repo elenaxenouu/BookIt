@@ -13,7 +13,7 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         int choice;
         
-            System.out.println("Καλωσήρθαμε στο σύστημα κρατήσεων!");
+            System.out.println("Καλωσήρθατε στο σύστημα κρατήσεων!");
             System.out.println("1. Είσοδος Διαχειριστή");
             System.out.println("2. Είσοδος Πελάτη");
             System.out.println("0. Έξοδος");
