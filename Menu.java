@@ -12,15 +12,20 @@ public class Menu {
     public void showMainMenu() {
         Scanner scanner = new Scanner(System.in);
         int choice;
-
-        do {
-            System.out.println("Καλώς ήρθατε στο Σύστημα Κρατήσεων!");
-            System.out.println("1. Σύνδεση Διαχειριστή");
-            System.out.println("2. Είσοδος Πελάτη");
-            System.out.println("0. Έξοδος");
-            System.out.print("Επιλογή: ");
+        
+            System.out.println("Welcome to reservation system!");
+            System.out.println("1. Admin login");
+            System.out.println("2. Customer ");
+            System.out.println("0. Exit");
             choice = scanner.nextInt();
-
+            // Ελεγχος εγκυροτητας στοιχειων εισοδου 
+            while (choice !=0 && choice !=1 && choice!=2) {
+           System.out.println("Not valid answer.Please try again.");
+           System.out.println("1. Admin login");
+           System.out.println("2. Customer ");
+           System.out.println("0. Exit");
+           choice = scanner.nextInt();
+            }
             switch (choice) {
                 case 1:
                     showAdminMenu(scanner);
@@ -29,13 +34,14 @@ public class Menu {
                     showCustomerMenu(scanner);
                     break;
                 case 0:
-                    System.out.println("Έξοδος από το πρόγραμμα.");
+                    System.out.println("You're offline.");
                     break;
-                default:
-                    System.out.println("Μη έγκυρη επιλογή. Προσπαθήστε ξανά.");
+            
+                  
             }
-        } while (choice != 0);
+        
     }
+      
 
     // Μενού Διαχειριστή
     private void showAdminMenu(Scanner scanner) {
