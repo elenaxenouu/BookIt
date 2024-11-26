@@ -11,6 +11,8 @@ public class Main {
         system.addService(new Service("Υπηρεσια5", 10.0, 2));
         system.addService(new Service("Υπηρεσια6", 20.0, 3));
         system.addService(new Service("Υπηρεσια7", 32.0, 2));
+        // εδω θελουμε ελεγχο εγκυροτητας ο χρηστης πρεπει να μπορει να πληκτρολογει νουμερα απο 1-7 διαφορετικα μηνυμα λαθους 
+        
         Menu menu = new Menu(system);
         menu.showMainMenu();
         
