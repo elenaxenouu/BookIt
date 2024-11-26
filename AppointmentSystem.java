@@ -11,12 +11,12 @@ public class AppointmentSystem {
 
     // Εμφάνιση όλων των υπηρεσιών
     public void displayServices() {
-        System.out.println("Διαθέσιμες Υπηρεσίες:");
+        System.out.println("Available Services:");
         for (int i = 0; i < services.size(); i++) {
             Service service = services.get(i);
             System.out.println((i + 1) + ". " + service.getName() + " - " 
                                + service.getCost() + "€ - " 
-                               + service.getDuration() + " ώρες");
+                               + service.getDuration() + " hours");
         }
     }
 
