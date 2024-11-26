@@ -48,7 +48,7 @@ public class Menu {
         System.out.println("=== Σύνδεση Διαχειριστή ===");
         System.out.print("Όνομα χρήστη: ");
         String username = scanner.next();
-        System.out.print("Κωδικός πρόσβασης: ");
+        System.out.print("Κωδικός πρόσβασης: "); // να κανουμε τον κωδικο να μην φαινεται 
         String password = scanner.next();
 
         if (username.equals("admin") && password.equals("1234")) {
@@ -64,14 +64,14 @@ public class Menu {
         System.out.println("=== Μενού Πελάτη ===");
         system.displayServices();
         System.out.print("Επιλέξτε αριθμό υπηρεσίας: ");
-        int serviceChoice = scanner.nextInt();
+        int serviceChoice = scanner.nextInt(); //εδω να μπει ο ελεγχος 
         Scanner scanner1 = new Scanner(System.in);
         System.out.println("Κρατήσεις Πελατών");
 
         System.out.print("Όνοματεπώνυμο: ");
-        String name = scanner1.nextLine();
+        String name = scanner1.nextLine(); // ελεγχος και εδω για τουλαχιστον 3 χαρακτηρες
 
-        System.out.print("Διαθέσιμο εύρος ωρών (π.χ. 10-14): ");
+        System.out.print("Διαθέσιμο εύρος ωρών (π.χ. 10-14): "); // πρεπει να καθορισουμε το ωραριο της εταιριας και μετα με ελεγχο να το εμφανιζουμε ετσι ωστε να μην το υπερβαινει η επιλογη του χρηστη 
         
         String hours = scanner1.nextLine();
 
