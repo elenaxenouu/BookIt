@@ -216,3 +216,146 @@ public static void saveAppointments() {
         }
     }
 
+     // Προσθήκη ραντεβού για τον πελάτη
+    public static void addAppointment(Customer customer, Scanner scanner) {
+
+
+        int serviceChoice = -1;
+
+        // Επιλογή υπηρεσίας
+        while (serviceChoice < 1 || serviceChoice > services.size()) {
+            System.out.println("\nSelect a service:");
+            for (int i = 0; i < services.size(); i++) {
+                Service service = services.get(i);
+                System.out.println((i + 1) + ". " + service.getName() + " - " + service.getCost() + "€");
+            }
+            if (services.isEmpty()) {
+                System.out.println("No services available. Please try again later.");
+                return; // Αν δεν υπάρχουν υπηρεσίες, σταματάμε την εκτέλεση
+            }
+
+            System.out.print("Enter service number: ");
+            if (scanner.hasNextInt()) {
+                serviceChoice = scanner.nextInt();
+                scanner.nextLine(); // Καθαρισμός του buffer
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine(); // Καθαρισμός του buffer
+            }
+
+            if (serviceChoice < 1 || serviceChoice > services.size()) {
+                System.out.println("Invalid service choice. Please try again.");
+            }
+        }
+
+        Service selectedService = services.get(serviceChoice - 1);
+
+        LocalTime startTime = null;
+        LocalTime endTime = null;
+
+        // Εισαγωγή ώρας
+        while (startTime == null || endTime == null) {
+            System.out.print("Operating hours are from 08:00 to 22:00.\nEnter time range (format: HH:mm-HH:mm): ");
+            String timeRangeStr = scanner.nextLine();
+
+            try {
+                String[] timeParts = timeRangeStr.split("-");
+                if (timeParts.length == 2) {
+                    startTime = LocalTime.parse(timeParts[0], DateTimeFormatter.ofPattern("HH:mm"));
+                    endTime = LocalTime.parse(timeParts[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+                    // Επαλήθευση του εύρους ώρας
+                    if (startTime.isBefore(LocalTime.of(8, 0)) || endTime.isAfter(LocalTime.of(22, 0))) {
+                        System.out.println("Invalid time range. The time must be between 08:00 and 22:00. Please try again.");
+                        startTime = null;
+                        endTime = null;
+                    } else if (startTime.isAfter(endTime)) {
+                        System.out.println("Invalid time range. The start time must be before the end time. Please try again.");
+                        startTime = null;
+                        endTime = null;
+                    }
+                } else {
+                    System.out.println("Invalid format. Please use the format HH:mm-HH:mm.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid time format. Please try again.");
+            }
+        }
+
+        // Δημιουργία ραντεβού
+        Appointment newAppointment = new Appointment(customer.getUsername(), selectedService.getName(), selectedService.getCost(), startTime, endTime);
+
+        // Προσθήκη ραντεβού στον πελάτη
+        customer.addAppointment(newAppointment);
+
+
+
+
+        System.out.println("Appointment successfully booked!");
+    }
+
+
+// Φόρτωση ραντεβού από τη βάση
+public static void loadAppointments() {
+    String query = "SELECT * FROM appointments";
+
+    try (Connection conn = DatabaseHelper.connect();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query)) {
+
+        while (rs.next()) {
+            String username = rs.getString("username");
+            String servicename = rs.getString("servicename");
+            double cost = rs.getDouble("cost");
+            LocalTime startTime = LocalTime.parse(rs.getString("start_time"));
+            LocalTime endTime = LocalTime.parse(rs.getString("end_time"));
+
+            // Βρίσκουμε τον πελάτη με το όνομα χρήστη
+            for (Customer customer : customers) {
+                if (customer.getUsername().equals(username)) {  // Αν βρούμε τον πελάτη
+                    Appointment appointment = new Appointment(username, servicename, cost, startTime, endTime);
+                    customer.getAppointments().add(appointment);  // Προσθήκη του ραντεβού στον πελάτη
+                    break;  // Βγήκαμε από την αναζήτηση του πελάτη
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error loading appointments.");
+        e.printStackTrace();
+    }
+}
+
+
+
+
+
+    // Προβολή ραντεβού του πελάτη
+    public static void viewAppointments(Customer customer) {
+        if (customer.getAppointments().isEmpty()) {
+            System.out.println("You have no appointments.");
+        } else {
+            System.out.println("\nYour appointments:");
+            for (Appointment appointment : customer.getAppointments()) {
+                System.out.println(appointment);
+            }
+        }
+    }
+
+    public static void viewOptimizedSchedule() {
+        ArrayList<Appointment> allAppointments = new ArrayList<>();
+        for (Customer customer : customers) {
+            allAppointments.addAll(customer.getAppointments());
+        }
+
+        List<Appointment> optimizedSchedule = OptimizationAlgorithm.optimizeAppointments(allAppointments);
+
+        System.out.println("\nOptimized appointment schedule:");
+        for (Appointment appointment : optimizedSchedule) {
+            System.out.println(appointment);
+        }
+    }
+
+
+}
+
