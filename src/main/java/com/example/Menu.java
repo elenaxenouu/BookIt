@@ -6,7 +6,7 @@ public class Menu {
 
     public static void showMainMenu(Scanner scanner) {
         while (true) {
-            System.out.println("\nWelcome to the Appointment Management System.");
+            System.out.println("\nWelcome to Bookit System.");
             System.out.println("1. Login as Customer");
             System.out.println("2. New Customer");
             System.out.println("3. Login as Administrator");
