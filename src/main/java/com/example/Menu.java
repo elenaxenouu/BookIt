@@ -37,7 +37,7 @@ public class Menu {
     public static void showCustomerMenu(Customer customer, Scanner scanner) {
         while (true) {
             System.out.println("\nWelcome, " + customer.getName());
-            System.out.println("1. Book an Appointment");
+            System.out.println("1. Book an Appointment for tomorrow");
             System.out.println("2. View Your Appointments");
             System.out.println("3. Logout");
             System.out.print("Choose: ");
