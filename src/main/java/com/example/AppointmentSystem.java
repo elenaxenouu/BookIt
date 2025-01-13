@@ -291,7 +291,7 @@ public static void saveAppointments() {
 
 
 
-        System.out.println("We"ll update you on our availability soon!");
+        System.out.println("We'll update you on our availability soon!");
     }
 
 
