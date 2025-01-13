@@ -227,7 +227,7 @@ public static void saveAppointments() {
             System.out.println("\nSelect a service:");
             for (int i = 0; i < services.size(); i++) {
                 Service service = services.get(i);
-                System.out.println((i + 1) + ". " + service.getName() + " - " + service.getCost() + "€");
+                System.out.println((i + 1) + ". " + service.getName() + " - " + service.getCost() + " " +  "EUR");
             }
             if (services.isEmpty()) {
                 System.out.println("No services available. Please try again later.");
