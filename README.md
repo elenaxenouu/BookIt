@@ -37,3 +37,8 @@
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
+## Video License
+
+The accompanying video is licensed under the Creative Commons Attribution (CC BY) license. You can view the terms at [Creative Commons](https://creativecommons.org/licenses/by/4.0/).
+
+
